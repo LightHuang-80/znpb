@@ -28,5 +28,5 @@ void TOF_proc(void);
 
 /* UART3接收回调，在HAL_UART_RxCpltCallback中调用 */
 void TOF_RxCallback(void);
-
+extern uint16_t modbus_crc16(const uint8_t *data, uint16_t length);
 #endif /* SRC_SENSORS_TOF_H_ */

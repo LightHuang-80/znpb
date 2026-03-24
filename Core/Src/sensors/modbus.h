@@ -16,5 +16,5 @@ extern volatile float   deviceSpeed[5];
 
 void Modbus_init(void);
 void Modbus_proc();
-
+uint16_t modbus_crc16(const uint8_t *data, uint16_t length);
 #endif /* SRC_MOTION_MODBUS_H_ */
