@@ -1,4 +1,0 @@
-../Core/Src/sensors/tof.c:39:13:TOF_resetUart	32	static
-../Core/Src/sensors/tof.c:61:6:TOF_init	8	static
-../Core/Src/sensors/tof.c:107:6:TOF_proc	24	static
-../Core/Src/sensors/tof.c:135:6:TOF_RxCallback	8	static

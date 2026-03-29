@@ -1,8 +1,0 @@
-../Core/Src/eeprom/eeprom.c:56:10:EE_Init	41
-../Core/Src/eeprom/eeprom.c:294:10:EE_ReadVariable	4
-../Core/Src/eeprom/eeprom.c:353:10:EE_WriteVariable	2
-../Core/Src/eeprom/eeprom.c:381:26:EE_Format	5
-../Core/Src/eeprom/eeprom.c:432:17:EE_FindValidPage	9
-../Core/Src/eeprom/eeprom.c:504:17:EE_VerifyPageFullWriteVariable	5
-../Core/Src/eeprom/eeprom.c:564:17:EE_PageTransfer	11
-../Core/Src/eeprom/eeprom.c:671:10:EE_VerifyPageFullyErased	3

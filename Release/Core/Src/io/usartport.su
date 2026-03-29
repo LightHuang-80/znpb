@@ -1,7 +1,0 @@
-../Core/Src/io/usartport.c:31:6:Port_reset	0	static
-../Core/Src/io/usartport.c:36:19:Port_init	16	static
-../Core/Src/io/usartport.c:51:10:Port_read	16	static
-../Core/Src/io/usartport.c:64:10:Port_recvData_len	0	static
-../Core/Src/io/usartport.c:70:6:Port_send	8	static
-../Core/Src/io/usartport.c:76:6:HAL_UART_RxCpltCallback	16	static
-../Core/Src/io/usartport.c:90:6:HAL_UART_ErrorCallback	16	static

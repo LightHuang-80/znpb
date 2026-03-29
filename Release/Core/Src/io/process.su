@@ -1,8 +1,0 @@
-../Core/Src/io/process.c:54:6:Proc_init	8	static
-../Core/Src/io/process.c:62:6:Proc_report_strength	0	static
-../Core/Src/io/process.c:75:6:Proc_report_touched	0	static
-../Core/Src/io/process.c:94:6:Proc_report_stationAng	16	static
-../Core/Src/io/process.c:128:6:Proc_report_axisAng	16	static
-../Core/Src/io/process.c:155:6:Proc_report_distance	0	static
-../Core/Src/io/process.c:173:6:Proc_handle	0	static
-../Core/Src/io/process.c:211:6:Proc_loop	40	static

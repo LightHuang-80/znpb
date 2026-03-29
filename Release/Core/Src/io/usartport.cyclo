@@ -1,7 +1,0 @@
-../Core/Src/io/usartport.c:31:6:Port_reset	1
-../Core/Src/io/usartport.c:36:19:Port_init	3
-../Core/Src/io/usartport.c:51:10:Port_read	2
-../Core/Src/io/usartport.c:64:10:Port_recvData_len	2
-../Core/Src/io/usartport.c:70:6:Port_send	1
-../Core/Src/io/usartport.c:76:6:HAL_UART_RxCpltCallback	4
-../Core/Src/io/usartport.c:90:6:HAL_UART_ErrorCallback	4

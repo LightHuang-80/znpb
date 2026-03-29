@@ -1,9 +1,0 @@
-../Core/Src/io/CO_fifo.h:123:20:CO_fifo_reset	2
-../Core/Src/io/CO_fifo.h:160:22:CO_fifo_getOccupied	2
-../Core/Src/io/usartport.c:30:6:Port_reset	1
-../Core/Src/io/usartport.c:35:19:Port_init	3
-../Core/Src/io/usartport.c:50:10:Port_read	2
-../Core/Src/io/usartport.c:63:10:Port_recvData_len	1
-../Core/Src/io/usartport.c:69:6:Port_send	1
-../Core/Src/io/usartport.c:75:6:HAL_UART_RxCpltCallback	3
-../Core/Src/io/usartport.c:85:6:HAL_UART_ErrorCallback	4
