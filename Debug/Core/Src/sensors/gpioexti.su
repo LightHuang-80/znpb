@@ -1,0 +1,2 @@
+../Core/Src/sensors/gpioexti.c:15:6:GPIO_updateTouchedState	16	static
+../Core/Src/sensors/gpioexti.c:47:6:HAL_GPIO_EXTI_Callback	16	static

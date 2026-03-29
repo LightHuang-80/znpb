@@ -1,0 +1,6 @@
+../Core/Src/sensors/modbus.c:33:10:modbus_crc16	4
+../Core/Src/sensors/modbus.c:50:6:Modbus_init	1
+../Core/Src/sensors/modbus.c:115:6:HAL_TIM_PeriodElapsedCallback	3
+../Core/Src/sensors/modbus.c:128:6:HAL_UARTEx_RxEventCallback	2
+../Core/Src/sensors/modbus.c:138:5:Process_Modbus_Frame	7
+../Core/Src/sensors/modbus.c:183:6:Modbus_proc	3

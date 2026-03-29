@@ -1,0 +1,6 @@
+../Core/Src/io/process.c:53:6:Proc_init	8	static
+../Core/Src/io/process.c:61:6:Proc_report_strength	16	static
+../Core/Src/io/process.c:74:6:Proc_report_touched	24	static
+../Core/Src/io/process.c:93:6:Proc_report_stationAng	24	static
+../Core/Src/io/process.c:117:6:Proc_handle	24	static
+../Core/Src/io/process.c:153:6:Proc_loop	32	static

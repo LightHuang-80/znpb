@@ -1,0 +1,7 @@
+../Core/Src/io/CO_fifo.c:45:6:CO_fifo_init	4
+../Core/Src/io/CO_fifo.c:144:8:CO_fifo_write	8
+../Core/Src/io/CO_fifo.c:191:8:CO_fifo_read	8
+../Core/Src/io/CO_fifo.c:235:6:CO_fifo_offset	3
+../Core/Src/io/CO_fifo.c:250:8:CO_fifo_altBegin	5
+../Core/Src/io/CO_fifo.c:273:6:CO_fifo_altFinish	5
+../Core/Src/io/CO_fifo.c:300:8:CO_fifo_altRead	4

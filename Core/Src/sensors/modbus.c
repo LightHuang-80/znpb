@@ -160,10 +160,10 @@ int Process_Modbus_Frame(uint8_t *buf, uint16_t len) {
     }
 
     // 提取 状态码
-    /*int16_t  raw_status = (buf[11] << 8) | buf[12];
+    int16_t  raw_status = (buf[11] << 8) | buf[12];
     if (raw_status != 0){
     	return -1;
-    }*/
+    }
 
     // 提取 21位角度数据
     uint32_t raw_data = (buf[3] << 24) | (buf[4] << 16) | (buf[5] << 8) | buf[6];

@@ -1,0 +1,8 @@
+../Core/Src/io/process.c:54:6:Proc_init	1
+../Core/Src/io/process.c:62:6:Proc_report_strength	1
+../Core/Src/io/process.c:75:6:Proc_report_touched	1
+../Core/Src/io/process.c:94:6:Proc_report_stationAng	6
+../Core/Src/io/process.c:128:6:Proc_report_axisAng	5
+../Core/Src/io/process.c:155:6:Proc_report_distance	1
+../Core/Src/io/process.c:173:6:Proc_handle	7
+../Core/Src/io/process.c:211:6:Proc_loop	14

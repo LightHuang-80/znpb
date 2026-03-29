@@ -9,6 +9,7 @@
 #include "main.h"
 #include "usart.h"
 #include <string.h>
+#include "modbus.h"
 #include "tof.h"
 
 // 缓冲区
@@ -33,23 +34,6 @@ volatile uint32_t tof_debugErrCount = 0;   // 错误恢复计数
 
 // 接收超时时间（ms）- 超过此时间无数据则认为UART异常
 #define TOF_RX_TIMEOUT 1000
-
-// CRC-16-Modbus 计算函数
-static uint16_t tof_crc16(const uint8_t *data, uint16_t length) {
-    uint16_t crc = 0xFFFF;
-    const uint16_t polynomial = 0xA001;
-    for (uint16_t i = 0; i < length; i++) {
-        crc ^= (uint16_t)data[i];
-        for (uint8_t j = 0; j < 8; j++) {
-            if (crc & 0x0001) {
-                crc = (crc >> 1) ^ polynomial;
-            } else {
-                crc >>= 1;
-            }
-        }
-    }
-    return crc;
-}
 
 // 重置UART3接收
 static void TOF_resetUart(void) {
@@ -102,7 +86,7 @@ static int TOF_processFrame(uint8_t *buf, uint16_t len) {
     
     // 验证CRC
     uint16_t crc_received = (buf[len-1] << 8) | buf[len-2];
-    uint16_t crc_calculated = tof_crc16(buf, len-2);
+    uint16_t crc_calculated = modbus_crc16(buf, len-2);
     if (crc_received != crc_calculated) {
         return -1; // CRC错误
     }
