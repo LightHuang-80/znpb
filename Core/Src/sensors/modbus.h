@@ -22,4 +22,6 @@ uint16_t modbus_crc16(const uint8_t *data, uint16_t length);
 int Modbus_resetEncoder(uint8_t device_id, uint16_t reset_type);
 int Modbus_restartEncoder(uint8_t device_id);
 
+uint16_t modbus_crc16(const uint8_t *data, uint16_t length);
+
 #endif /* SRC_MOTION_MODBUS_H_ */

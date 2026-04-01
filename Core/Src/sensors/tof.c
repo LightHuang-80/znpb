@@ -9,6 +9,7 @@
 #include "main.h"
 #include "usart.h"
 #include <string.h>
+#include "modbus.h"
 #include "tof.h"
 
 // 缓冲区
@@ -33,7 +34,6 @@ volatile uint32_t tof_debugErrCount = 0;   // 错误恢复计数
 
 // 接收超时时间（ms）- 超过此时间无数据则认为UART异常
 #define TOF_RX_TIMEOUT 1000
-
 
 // 重置UART3接收
 static void TOF_resetUart(void) {
