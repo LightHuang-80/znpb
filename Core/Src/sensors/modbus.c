@@ -191,3 +191,122 @@ void Modbus_proc()
 		}
 	}
 }
+
+/**
+ * @brief 复位编码器
+ * @param device_id 设备ID (1-5)
+ * @param reset_type 复位类型值，直接写入0x3C1寄存器
+ *        - 0x8000: 位置清零
+ *        - 0x4000: 复位圈数
+ *        - 0x2000: 复位全部错误
+ *        - 0x1000: 进入线性校准状态
+ *        - 可组合使用，如 0xC000 = 位置清零 + 复位圈数
+ * @return 0:成功, -1:参数错误
+ */
+int Modbus_resetEncoder(uint8_t device_id, uint16_t reset_type)
+{
+	if (device_id < 1 || device_id > 5) {
+		return -1;
+	}
+
+	uint8_t frame[16];
+	uint16_t crc;
+
+	// 1. 停止TIM2定时器，暂停正常轮询
+	HAL_TIM_Base_Stop_IT(&htim2);
+
+	// 短暂延时，等待总线空闲
+	HAL_Delay(10);
+
+	// 2. 发送解锁命令 (功能码0x10，写多个寄存器)
+	// 寄存器地址: 0x03C2, 写入2个寄存器
+	// 数据: 0x000F (读写锁标志), 0x0000 (读写锁密码)
+	frame[0] = device_id;           // 从站地址
+	frame[1] = 0x10;                // 功能码: 写多个寄存器
+	frame[2] = 0x03;                // 寄存器起始地址高字节
+	frame[3] = 0xC2;                // 寄存器起始地址低字节 (0x03C2)
+	frame[4] = 0x00;                // 寄存器数量高字节
+	frame[5] = 0x02;                // 寄存器数量低字节 (2个寄存器)
+	frame[6] = 0x04;                // 字节计数 (2个寄存器 * 2字节)
+	frame[7] = 0x00;                // 读写锁标志高字节
+	frame[8] = 0x0F;                // 读写锁标志低字节 (0x000F)
+	frame[9] = 0x00;                // 读写锁密码高字节
+	frame[10] = 0x00;               // 读写锁密码低字节 (0x0000)
+
+	// 计算CRC (小端序: 先低字节后高字节)
+	crc = modbus_crc16(frame, 11);
+	frame[11] = crc & 0xFF;         // CRC低字节
+	frame[12] = (crc >> 8) & 0xFF;  // CRC高字节
+
+	// 发送解锁命令
+	HAL_UART_Transmit(&huart2, frame, 13, 500);
+
+	// 等待解锁命令处理完成
+	HAL_Delay(30);
+
+	// 3. 发送复位命令 (功能码0x06，写单个寄存器)
+	// 寄存器地址: 0x03C1, 写入reset_type值
+	frame[0] = device_id;           // 从站地址
+	frame[1] = 0x06;                // 功能码: 写单个寄存器
+	frame[2] = 0x03;                // 寄存器地址高字节
+	frame[3] = 0xC1;                // 寄存器地址低字节 (0x03C1)
+	frame[4] = (reset_type >> 8) & 0xFF;   // 寄存器值高字节
+	frame[5] = reset_type & 0xFF;          // 寄存器值低字节
+
+	// 计算CRC (小端序)
+	crc = modbus_crc16(frame, 6);
+	frame[6] = crc & 0xFF;          // CRC低字节
+	frame[7] = (crc >> 8) & 0xFF;   // CRC高字节
+
+	// 发送复位命令
+	HAL_UART_Transmit(&huart2, frame, 8, 500);
+
+	// 等待复位命令处理完成
+	HAL_Delay(20);
+
+	// 4. 恢复TIM2定时器，继续正常轮询
+	HAL_TIM_Base_Start_IT(&htim2);
+
+	return 0;
+}
+
+/**
+ * @brief 重启编码器设备 (使用功能码0x41)
+ * @param device_id 设备ID (1-5)
+ * @return 0:成功, -1:参数错误
+ */
+int Modbus_restartEncoder(uint8_t device_id)
+{
+	if (device_id < 1 || device_id > 5) {
+		return -1;
+	}
+
+	uint8_t frame[4];
+	uint16_t crc;
+
+	// 停止TIM2定时器
+	HAL_TIM_Base_Stop_IT(&htim2);
+
+	// 短暂延时
+	HAL_Delay(10);
+
+	// 发送重启命令 (功能码0x41)
+	frame[0] = device_id;           // 从站地址
+	frame[1] = 0x41;                // 功能码: 设备重启
+
+	// 计算CRC (小端序)
+	crc = modbus_crc16(frame, 2);
+	frame[2] = crc & 0xFF;          // CRC低字节
+	frame[3] = (crc >> 8) & 0xFF;   // CRC高字节
+
+	// 发送重启命令
+	HAL_UART_Transmit(&huart2, frame, 4, 500);
+
+	// 等待设备重启
+	HAL_Delay(100);
+
+	// 恢复TIM2定时器
+	HAL_TIM_Base_Start_IT(&htim2);
+
+	return 0;
+}

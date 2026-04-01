@@ -14,6 +14,9 @@
 #include "CO_fifo.h"
 #include "canport.h"
 
+// CAN ID for encoder control (broadcast ID 70)
+#define CAN_ID_ENCODER_CTRL  0x46
+
 #define DATABUF_SIZE  300
 uint8_t CANDataBuf[DATABUF_SIZE];
 
@@ -489,8 +492,9 @@ prv_read_can_received_msg(CAN_HandleTypeDef* hcan, uint32_t fifo, uint32_t fifo_
     }
 
     /* Setup identifier (with RTR) and length */
-    if (rx_hdr.StdId == nds_conf.hwset.ID){
-        rcvMsg.ident = nds_conf.hwset.ID | (rx_hdr.RTR == CAN_RTR_REMOTE ? FLAG_RTR : 0x00);
+    /* Accept messages for this device's ID or encoder control broadcast */
+    if (rx_hdr.StdId == nds_conf.hwset.ID || rx_hdr.StdId == CAN_ID_ENCODER_CTRL){
+        rcvMsg.ident = rx_hdr.StdId | (rx_hdr.RTR == CAN_RTR_REMOTE ? FLAG_RTR : 0x00);
         rcvMsg.dlc = rx_hdr.DLC;
         CO_fifo_write(&canport.rxBuf, (const char*)&rcvMsg, sizeof(CANrxMsg_t), NULL);
     }

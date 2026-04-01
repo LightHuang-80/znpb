@@ -47,4 +47,6 @@
 #define CMD_SENS_AXISANG      0x44
 #define CMD_SENS_DISTANCE     0x45  // 距离传感器数据
 
+#define CMD_ENCODER_RESET     0x46  // 编码器复位命令 (十进制70)
+
 #endif /* SRC_IO_CMD_H_ */

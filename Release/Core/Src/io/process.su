@@ -1,0 +1,9 @@
+../Core/Src/io/process.c:61:6:Proc_init	8	static
+../Core/Src/io/process.c:69:6:Proc_report_strength	0	static
+../Core/Src/io/process.c:82:6:Proc_report_touched	0	static
+../Core/Src/io/process.c:101:6:Proc_report_stationAng	16	static
+../Core/Src/io/process.c:135:6:Proc_report_axisAng	16	static
+../Core/Src/io/process.c:162:6:Proc_report_distance	0	static
+../Core/Src/io/process.c:196:6:Proc_handle_encoder_ctrl	16	static
+../Core/Src/io/process.c:231:6:Proc_handle	16	static
+../Core/Src/io/process.c:311:6:Proc_loop	40	static

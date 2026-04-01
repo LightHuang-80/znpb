@@ -51,6 +51,13 @@ typedef struct _rpt_settings_ {
 
 rpt_settings_t rpt_settings;
 
+/* 编码器控制CAN ID */
+#define CAN_ID_ENCODER_CTRL  0x46  // 十进制70
+
+/* 编码器控制命令 */
+#define ENCODER_CMD_RESET    0x01
+#define ENCODER_CMD_RESTART  0x02
+
 void Proc_init()
 {
 	CANmodule_init(&hcan, 250);
@@ -170,6 +177,57 @@ void Proc_report_distance()
 	CANsend(tx);
 }
 
+/**
+ * @brief 处理编码器控制消息 (CAN ID: 0x70)
+ * @param rx CAN接收消息
+ * 
+ * 数据格式:
+ *   data[0]: device_id (1-5, 0=全部)
+ *   data[1]: cmd (0x01=复位, 0x02=重启)
+ *   data[2]: reset_type_h (复位类型高字节)
+ *   data[3]: reset_type_l (复位类型低字节)
+ * 
+ * 复位类型:
+ *   0x8000: 位置清零
+ *   0x4000: 复位圈数
+ *   0x2000: 复位全部错误
+ *   0x1000: 进入线性校准状态
+ */
+void Proc_handle_encoder_ctrl(CANrxMsg_t* rx)
+{
+	if (rx->dlc < 2) return;
+	
+	uint8_t device_id = rx->data[0];
+	uint8_t cmd = rx->data[1];
+	
+	if (cmd == ENCODER_CMD_RESET && rx->dlc >= 4) {
+		// 复位命令
+		uint16_t reset_type = (rx->data[2] << 8) | rx->data[3];
+		
+		if (device_id == 0) {
+			// 复位全部编码器 (ID 1-5)
+			for (uint8_t i = 1; i <= 5; i++) {
+				Modbus_resetEncoder(i, reset_type);
+			}
+		} else if (device_id >= 1 && device_id <= 5) {
+			// 复位指定编码器
+			Modbus_resetEncoder(device_id, reset_type);
+		}
+	}
+	else if (cmd == ENCODER_CMD_RESTART) {
+		// 重启命令
+		if (device_id == 0) {
+			// 重启全部编码器
+			for (uint8_t i = 1; i <= 5; i++) {
+				Modbus_restartEncoder(i);
+			}
+		} else if (device_id >= 1 && device_id <= 5) {
+			// 重启指定编码器
+			Modbus_restartEncoder(device_id);
+		}
+	}
+}
+
 void Proc_handle(CANrxMsg_t* rx)
 {
 	if (rx->ident != nds_conf.hwset.ID){
@@ -203,6 +261,48 @@ void Proc_handle(CANrxMsg_t* rx)
 
 		}break;
 
+	case CMD_ENCODER_RESET:{
+		// 编码器复位命令处理
+		// rx->data[1]: device_id (1-5, 0xFF=全部)
+		// rx->data[2]: reset_type
+		//   0x01 = 位置清零 (0x8000)
+		//   0x02 = 复位圈数 (0x4000)
+		//   0x03 = 复位全部错误 (0x2000)
+		//   0x04 = 设备重启 (功能码0x41)
+		//   0x05 = 位置清零+复位圈数 (0xC000)
+		uint8_t dev_id = rx->data[1];
+		uint8_t rst_type = rx->data[2];
+		uint16_t modbus_reset_value = 0;
+
+		// 转换复位类型为Modbus寄存器值
+		switch(rst_type) {
+			case 0x01: modbus_reset_value = 0x8000; break;  // 位置清零
+			case 0x02: modbus_reset_value = 0x4000; break;  // 复位圈数
+			case 0x03: modbus_reset_value = 0x2000; break;  // 复位全部错误
+			case 0x04: modbus_reset_value = 0;      break;  // 设备重启(特殊处理)
+			case 0x05: modbus_reset_value = 0xC000; break;  // 位置清零+复位圈数
+			default: break;  // 无效类型，不执行操作
+		}
+
+		if (dev_id == 0xFF) {
+			// 复位全部编码器 (ID 1-5)
+			for (uint8_t i = 1; i <= 5; i++) {
+				if (rst_type == 0x04) {
+					Modbus_restartEncoder(i);
+				} else if (modbus_reset_value != 0) {
+					Modbus_resetEncoder(i, modbus_reset_value);
+				}
+			}
+		} else if (dev_id >= 1 && dev_id <= 5) {
+			// 复位指定编码器
+			if (rst_type == 0x04) {
+				Modbus_restartEncoder(dev_id);
+			} else if (modbus_reset_value != 0) {
+				Modbus_resetEncoder(dev_id, modbus_reset_value);
+			}
+		}
+		}break;
+
 	default:
 		break;
 	}
@@ -224,7 +324,12 @@ void Proc_loop()
 	CANrxMsg_t rx;
 	uint8_t ret = CANreadMsg(&rx);
 	if (ret){
-		Proc_handle(&rx);
+		// 检查是否是编码器控制消息 (CAN ID: 0x70)
+		if (rx.ident == CAN_ID_ENCODER_CTRL) {
+			Proc_handle_encoder_ctrl(&rx);
+		} else {
+			Proc_handle(&rx);
+		}
 	}
 
 	if (report_strength_sth > 0){
