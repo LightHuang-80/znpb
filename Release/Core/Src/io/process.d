@@ -28,14 +28,14 @@ Core/Src/io/process.o: ../Core/Src/io/process.c ../Core/Inc/main.h \
  ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim_ex.h \
  ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h \
  ../Core/Inc/usart.h ../Core/Inc/main.h ../Core/Inc/can.h \
- C:/Users/xiaob/Desktop/SBSensor/SBSensor/Core/Src/conf/log.h \
+ C:/Users/xiaob/Desktop/SBSensor\ -\ led/led/Core/Src/conf/log.h \
  ../Core/Inc/gpio.h \
- C:/Users/xiaob/Desktop/SBSensor/SBSensor/Core/Src/io/usartport.h \
+ C:/Users/xiaob/Desktop/SBSensor\ -\ led/led/Core/Src/io/usartport.h \
  ../Core/Src/io/canport.h ../Core/Src/io/CO_fifo.h ../Core/Src/io/cmd.h \
- C:/Users/xiaob/Desktop/SBSensor/SBSensor/Core/Src/conf/ndsconf.h \
- C:/Users/xiaob/Desktop/SBSensor/SBSensor/Core/Src/sensors/gpioexti.h \
- C:/Users/xiaob/Desktop/SBSensor/SBSensor/Core/Src/sensors/modbus.h \
- C:/Users/xiaob/Desktop/SBSensor/SBSensor/Core/Src/sensors/tof.h
+ C:/Users/xiaob/Desktop/SBSensor\ -\ led/led/Core/Src/conf/ndsconf.h \
+ C:/Users/xiaob/Desktop/SBSensor\ -\ led/led/Core/Src/sensors/gpioexti.h \
+ C:/Users/xiaob/Desktop/SBSensor\ -\ led/led/Core/Src/sensors/modbus.h \
+ C:/Users/xiaob/Desktop/SBSensor\ -\ led/led/Core/Src/sensors/tof.h
 ../Core/Inc/main.h:
 ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h:
 ../Core/Inc/stm32f1xx_hal_conf.h:
@@ -68,13 +68,13 @@ Core/Src/io/process.o: ../Core/Src/io/process.c ../Core/Inc/main.h \
 ../Core/Inc/usart.h:
 ../Core/Inc/main.h:
 ../Core/Inc/can.h:
-C:/Users/xiaob/Desktop/SBSensor/SBSensor/Core/Src/conf/log.h:
+C:/Users/xiaob/Desktop/SBSensor\ -\ led/led/Core/Src/conf/log.h:
 ../Core/Inc/gpio.h:
-C:/Users/xiaob/Desktop/SBSensor/SBSensor/Core/Src/io/usartport.h:
+C:/Users/xiaob/Desktop/SBSensor\ -\ led/led/Core/Src/io/usartport.h:
 ../Core/Src/io/canport.h:
 ../Core/Src/io/CO_fifo.h:
 ../Core/Src/io/cmd.h:
-C:/Users/xiaob/Desktop/SBSensor/SBSensor/Core/Src/conf/ndsconf.h:
-C:/Users/xiaob/Desktop/SBSensor/SBSensor/Core/Src/sensors/gpioexti.h:
-C:/Users/xiaob/Desktop/SBSensor/SBSensor/Core/Src/sensors/modbus.h:
-C:/Users/xiaob/Desktop/SBSensor/SBSensor/Core/Src/sensors/tof.h:
+C:/Users/xiaob/Desktop/SBSensor\ -\ led/led/Core/Src/conf/ndsconf.h:
+C:/Users/xiaob/Desktop/SBSensor\ -\ led/led/Core/Src/sensors/gpioexti.h:
+C:/Users/xiaob/Desktop/SBSensor\ -\ led/led/Core/Src/sensors/modbus.h:
+C:/Users/xiaob/Desktop/SBSensor\ -\ led/led/Core/Src/sensors/tof.h:

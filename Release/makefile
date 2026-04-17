@@ -70,8 +70,8 @@ all: main-build
 main-build: SBSensor.elf secondary-outputs
 
 # Tool invocations
-SBSensor.elf SBSensor.map: $(OBJS) $(USER_OBJS) C:\Users\xiaob\Desktop\SBSensor\SBSensor\STM32F103CBTX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-gcc -o "SBSensor.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m3 -T"C:\Users\xiaob\Desktop\SBSensor\SBSensor\STM32F103CBTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="SBSensor.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -u _printf_float -Wl,--start-group -lc -lm -Wl,--end-group
+SBSensor.elf SBSensor.map: $(OBJS) $(USER_OBJS) C:\Users\xiaob\Desktop\SBSensor\ -\ led\led\STM32F103CBTX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-gcc -o "SBSensor.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m3 -T"C:\Users\xiaob\Desktop\SBSensor - led\led\STM32F103CBTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="SBSensor.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -u _printf_float -Wl,--start-group -lc -lm -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 

@@ -28,9 +28,9 @@ Core/Src/io/usartport.o: ../Core/Src/io/usartport.c ../Core/Inc/main.h \
  ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim_ex.h \
  ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h \
  ../Core/Inc/usart.h ../Core/Inc/main.h \
- C:/Users/xiaob/Desktop/SBSensor/SBSensor/Core/Src/io/usartport.h \
+ C:/Users/xiaob/Desktop/SBSensor\ -\ led/led/Core/Src/io/usartport.h \
  ../Core/Src/io/CO_fifo.h \
- C:/Users/xiaob/Desktop/SBSensor/SBSensor/Core/Src/sensors/tof.h
+ C:/Users/xiaob/Desktop/SBSensor\ -\ led/led/Core/Src/sensors/tof.h
 ../Core/Inc/main.h:
 ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h:
 ../Core/Inc/stm32f1xx_hal_conf.h:
@@ -62,6 +62,6 @@ Core/Src/io/usartport.o: ../Core/Src/io/usartport.c ../Core/Inc/main.h \
 ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h:
 ../Core/Inc/usart.h:
 ../Core/Inc/main.h:
-C:/Users/xiaob/Desktop/SBSensor/SBSensor/Core/Src/io/usartport.h:
+C:/Users/xiaob/Desktop/SBSensor\ -\ led/led/Core/Src/io/usartport.h:
 ../Core/Src/io/CO_fifo.h:
-C:/Users/xiaob/Desktop/SBSensor/SBSensor/Core/Src/sensors/tof.h:
+C:/Users/xiaob/Desktop/SBSensor\ -\ led/led/Core/Src/sensors/tof.h:

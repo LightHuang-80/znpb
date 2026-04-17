@@ -28,7 +28,7 @@ Core/Src/sensors/modbus.o: ../Core/Src/sensors/modbus.c \
  ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim_ex.h \
  ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h \
  ../Core/Inc/usart.h ../Core/Inc/main.h ../Core/Inc/tim.h \
- C:/Users/xiaob/Desktop/SBSensor/SBSensor/Core/Src/conf/ndsconf.h
+ C:/Users/xiaob/Desktop/SBSensor\ -\ led/led/Core/Src/conf/ndsconf.h
 ../Core/Inc/main.h:
 ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h:
 ../Core/Inc/stm32f1xx_hal_conf.h:
@@ -61,4 +61,4 @@ Core/Src/sensors/modbus.o: ../Core/Src/sensors/modbus.c \
 ../Core/Inc/usart.h:
 ../Core/Inc/main.h:
 ../Core/Inc/tim.h:
-C:/Users/xiaob/Desktop/SBSensor/SBSensor/Core/Src/conf/ndsconf.h:
+C:/Users/xiaob/Desktop/SBSensor\ -\ led/led/Core/Src/conf/ndsconf.h:

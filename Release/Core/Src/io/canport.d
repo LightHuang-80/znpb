@@ -1,5 +1,5 @@
 Core/Src/io/canport.o: ../Core/Src/io/canport.c \
- C:/Users/xiaob/Desktop/SBSensor/SBSensor/Core/Src/conf/ndsconf.h \
+ C:/Users/xiaob/Desktop/SBSensor\ -\ led/led/Core/Src/conf/ndsconf.h \
  ../Core/Inc/can.h ../Core/Inc/main.h \
  ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h \
  ../Core/Inc/stm32f1xx_hal_conf.h \
@@ -30,7 +30,7 @@ Core/Src/io/canport.o: ../Core/Src/io/canport.c \
  ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim_ex.h \
  ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h \
  ../Core/Src/io/CO_fifo.h ../Core/Src/io/canport.h
-C:/Users/xiaob/Desktop/SBSensor/SBSensor/Core/Src/conf/ndsconf.h:
+C:/Users/xiaob/Desktop/SBSensor\ -\ led/led/Core/Src/conf/ndsconf.h:
 ../Core/Inc/can.h:
 ../Core/Inc/main.h:
 ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h:

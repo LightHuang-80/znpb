@@ -49,4 +49,6 @@
 
 #define CMD_ENCODER_RESET     0x46  // 编码器复位命令 (十进制70)
 
+#define CMD_LED_CTRL          0x48  // LED控制命令 (IN1/IN2高低控制)
+
 #endif /* SRC_IO_CMD_H_ */

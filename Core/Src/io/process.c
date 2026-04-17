@@ -55,6 +55,16 @@ rpt_settings_t rpt_settings;
 #define ENCODER_CMD_RESET    0x01
 #define ENCODER_CMD_RESTART  0x02
 
+/* LED循环控制参数 */
+typedef struct {
+	uint8_t  on_sec;       // 亮的秒数 (0=停止/常灭)
+	uint8_t  off_sec;      // 灭的秒数
+	uint8_t  is_on;        // 当前状态: 1=亮, 0=灭
+	uint32_t last_toggle;  // 上次切换时刻(ms)
+} led_ctrl_t;
+
+static led_ctrl_t led_ctrl[2] = {0};
+
 void Proc_init()
 {
 	CANmodule_init(&hcan, 250);
@@ -247,6 +257,36 @@ void Proc_handle(CANrxMsg_t* rx)
 		}
 		}break;
 
+	case CMD_LED_CTRL:{
+		// data[1] = IN1亮秒数, data[2] = IN1灭秒数
+		// data[3] = IN2亮秒数, data[4] = IN2灭秒数
+		if (rx->dlc >= 5) {
+			uint32_t now = HAL_GetTick();
+			led_ctrl[0].on_sec  = rx->data[1];
+			led_ctrl[0].off_sec = rx->data[2];
+			led_ctrl[0].last_toggle = now;
+			led_ctrl[1].on_sec  = rx->data[3];
+			led_ctrl[1].off_sec = rx->data[4];
+			led_ctrl[1].last_toggle = now;
+
+			// 立即设置初始状态 (PHASE_A=PB3, PHASE_B=PA15)
+			if (led_ctrl[0].on_sec > 0) {
+				led_ctrl[0].is_on = 1;
+				HAL_GPIO_WritePin(PA_GPIO_Port, PA_Pin, GPIO_PIN_SET);
+			} else {
+				led_ctrl[0].is_on = 0;
+				HAL_GPIO_WritePin(PA_GPIO_Port, PA_Pin, GPIO_PIN_RESET);
+			}
+			if (led_ctrl[1].on_sec > 0) {
+				led_ctrl[1].is_on = 1;
+				HAL_GPIO_WritePin(PB_GPIO_Port, PB_Pin, GPIO_PIN_SET);
+			} else {
+				led_ctrl[1].is_on = 0;
+				HAL_GPIO_WritePin(PB_GPIO_Port, PB_Pin, GPIO_PIN_RESET);
+			}
+		}
+		}break;
+
 	default:
 		break;
 	}
@@ -311,5 +351,34 @@ void Proc_loop()
 			Proc_report_distance();
 		}
 	}
+	/* LED循环控制 */
+	{
+		uint32_t now = HAL_GetTick();
+		// PHASE_A (PB3)
+		if (led_ctrl[0].on_sec > 0) {
+			uint32_t dur = led_ctrl[0].is_on
+				? (uint32_t)led_ctrl[0].on_sec * 1000
+				: (uint32_t)led_ctrl[0].off_sec * 1000;
+			if (now - led_ctrl[0].last_toggle >= dur) {
+				led_ctrl[0].is_on = !led_ctrl[0].is_on;
+				led_ctrl[0].last_toggle = now;
+				HAL_GPIO_WritePin(PA_GPIO_Port, PA_Pin,
+						led_ctrl[0].is_on ? GPIO_PIN_SET : GPIO_PIN_RESET);
+			}
+		}
+		// PHASE_B (PA15)
+		if (led_ctrl[1].on_sec > 0) {
+			uint32_t dur = led_ctrl[1].is_on
+				? (uint32_t)led_ctrl[1].on_sec * 1000
+				: (uint32_t)led_ctrl[1].off_sec * 1000;
+			if (now - led_ctrl[1].last_toggle >= dur) {
+				led_ctrl[1].is_on = !led_ctrl[1].is_on;
+				led_ctrl[1].last_toggle = now;
+				HAL_GPIO_WritePin(PB_GPIO_Port, PB_Pin,
+						led_ctrl[1].is_on ? GPIO_PIN_SET : GPIO_PIN_RESET);
+			}
+		}
+	}
+
 	loop_tick ++;
 }

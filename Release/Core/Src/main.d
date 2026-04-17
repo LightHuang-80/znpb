@@ -29,11 +29,11 @@ Core/Src/main.o: ../Core/Src/main.c ../Core/Inc/main.h \
  ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h \
  ../Core/Inc/adc.h ../Core/Inc/main.h ../Core/Inc/can.h ../Core/Inc/dma.h \
  ../Core/Inc/tim.h ../Core/Inc/usart.h ../Core/Inc/gpio.h \
- C:/Users/xiaob/Desktop/SBSensor/SBSensor/Core/Src/conf/ndsconf.h \
- C:/Users/xiaob/Desktop/SBSensor/SBSensor/Core/Src/io/process.h \
- C:/Users/xiaob/Desktop/SBSensor/SBSensor/Core/Src/sensors/modbus.h \
- C:/Users/xiaob/Desktop/SBSensor/SBSensor/Core/Src/sensors/hx711.h \
- C:/Users/xiaob/Desktop/SBSensor/SBSensor/Core/Src/sensors/tof.h
+ C:/Users/xiaob/Desktop/SBSensor\ -\ led/led/Core/Src/conf/ndsconf.h \
+ C:/Users/xiaob/Desktop/SBSensor\ -\ led/led/Core/Src/io/process.h \
+ C:/Users/xiaob/Desktop/SBSensor\ -\ led/led/Core/Src/sensors/modbus.h \
+ C:/Users/xiaob/Desktop/SBSensor\ -\ led/led/Core/Src/sensors/hx711.h \
+ C:/Users/xiaob/Desktop/SBSensor\ -\ led/led/Core/Src/sensors/tof.h
 ../Core/Inc/main.h:
 ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h:
 ../Core/Inc/stm32f1xx_hal_conf.h:
@@ -70,8 +70,8 @@ Core/Src/main.o: ../Core/Src/main.c ../Core/Inc/main.h \
 ../Core/Inc/tim.h:
 ../Core/Inc/usart.h:
 ../Core/Inc/gpio.h:
-C:/Users/xiaob/Desktop/SBSensor/SBSensor/Core/Src/conf/ndsconf.h:
-C:/Users/xiaob/Desktop/SBSensor/SBSensor/Core/Src/io/process.h:
-C:/Users/xiaob/Desktop/SBSensor/SBSensor/Core/Src/sensors/modbus.h:
-C:/Users/xiaob/Desktop/SBSensor/SBSensor/Core/Src/sensors/hx711.h:
-C:/Users/xiaob/Desktop/SBSensor/SBSensor/Core/Src/sensors/tof.h:
+C:/Users/xiaob/Desktop/SBSensor\ -\ led/led/Core/Src/conf/ndsconf.h:
+C:/Users/xiaob/Desktop/SBSensor\ -\ led/led/Core/Src/io/process.h:
+C:/Users/xiaob/Desktop/SBSensor\ -\ led/led/Core/Src/sensors/modbus.h:
+C:/Users/xiaob/Desktop/SBSensor\ -\ led/led/Core/Src/sensors/hx711.h:
+C:/Users/xiaob/Desktop/SBSensor\ -\ led/led/Core/Src/sensors/tof.h:
